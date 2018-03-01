@@ -1,14 +1,10 @@
+#include <math.h>
+#include "ExampleGame.h"
 
-#include "SDL.h"
-#include "SDL_image.h"
-#include <iostream>
-#include "SDLApp.h"
 using namespace std;
 
-
-int main(int argc, char* argv[]){
-	SDLApp g(800, 600);
-	g.run();
-	system("pause");
+int main(int ac, char** av) {
+	ExampleGame g;
+	g.start();
 	return 0;
 }

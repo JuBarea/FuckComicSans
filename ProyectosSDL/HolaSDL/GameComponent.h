@@ -13,7 +13,7 @@ using namespace std;
  */
 class GameComponent: public GameObject {
 public:
-	GameComponent(SDLApp* game);
+	GameComponent(SDLGame* game);
 	virtual ~GameComponent();
 
 	virtual void handleInput(Uint32 time, const SDL_Event& event);

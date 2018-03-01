@@ -1,41 +1,43 @@
 #ifndef GAMEOBJECT_H_
 #define GAMEOBJECT_H_
-#include <SDL.h>
+
+#include "SDLGame.h"
 #include "Vector2D.h"
 
-class SDLApp;
-class GameObject
-{
+class GameObject {
+
 public:
-	GameObject();
-	GameObject(SDLApp* game) :app(game) {}
+	GameObject(SDLGame* game);
 	virtual ~GameObject();
-	virtual void render() = 0;
-	virtual void update() = 0;
-	virtual bool handleEvent(SDL_Event& e) = 0;
 
-	Vector2D getPosition() { 
-		return position_; 
-	}
+	SDLGame* getGame() const;
 
-	Vector2D getVelocity() {
-		return velocity_;
-	}
+	bool isActive() const;
+	void setActive(bool active);
+	bool toggleActive();
 
-	void setVelocity(Vector2D velocity) {
-		velocity_ = velocity;
-	}
+	double getWidth() const;
+	void setWidth(double width);
+	double getHeight() const;
+	void setHeight(double height);
+	void scale(double s);
 
-	double getWidth() {
-		return width_;
-	}
+	const Vector2D& getPosition() const;
+	void setPosition(const Vector2D &pos);
 
-	double getHeight() {
-		return height_;
-	}
+	const Vector2D& getVelocity() const;
+	void setVelocity(const Vector2D &vel);
+
+	const Vector2D& getDirection() const;
+	void setDirection(const Vector2D &vel);
+
+	// abstract methods to be implemented in sub-classes
+	virtual void handleInput(Uint32 time, const SDL_Event& event) = 0;
+	virtual void update(Uint32 time) = 0;
+	virtual void render(Uint32 time) = 0;
 
 protected:
-	SDLApp* app;   // pointer to the game
+	SDLGame* game_; // pointer to the game
 
 	bool active_;   // indicates if the object is active
 
@@ -46,6 +48,7 @@ protected:
 	Vector2D direction_; // angle in degrees (0) is considered facing left
 	Vector2D velocity_; // direction
 
-};
-#endif /* GAMEOBJECT_H_ */
 
+};
+
+#endif /* GAMEOBJECT_H_ */

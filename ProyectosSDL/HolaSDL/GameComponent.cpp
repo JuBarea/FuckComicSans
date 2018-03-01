@@ -1,6 +1,6 @@
 #include "GameComponent.h"
 
-GameComponent::GameComponent(SDLApp* game) :
+GameComponent::GameComponent(SDLGame* game) :
 		GameObject(game), inputComp_(), physicsComp_(), renderComp_() {
 }
 
